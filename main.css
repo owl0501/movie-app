@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: lighter;
+}
+
+:root{
+    --titleColor:rgb(218, 218, 218);
+    --fgColor:rgb(50, 52, 52);
+    --bgColor:rgb(24, 23, 23);
+    --featureColor:rgb(168, 167, 167);
+}
+.scrollerbar-style1::-webkit-scrollbar{
+    background-color:transparent;
+    width: 5px;
+    height: 5px;
+}
+.scrollerbar-style1::-webkit-scrollbar-thumb{
+    background-color: rgba(200, 200, 200, .5);
+    border-radius: 20px;
+}
+.scrollerbar-style1::-webkit-scrollbar-track{
+    background-color: transparent;
+    border-radius: 20px;
+}
+body{
+    font-family: 'Poppings', sans-serif;
+    min-height: 100vh;
+}
+
+.mobile-container{
+    width: 100%;
+    background-color: var(--bgColor);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header{
+    width: 100%;
+    background-color: var(--fgColor);
+    text-align: center;
+    color: var(--titleColor);
+    padding: 1rem;
+}
+.search-wrap{
+    width: 100%;
+}
+.full-input{
+    width: calc(100% - 2rem);
+    background-color: transparent;
+    border-radius: 10px;
+    padding: .5rem 1rem;
+    margin: 1rem;
+    border: 2px solid #333;
+    align-self: stretch;
+    color: var(--titleColor);
+}
+.btn-search{
+    background-color: transparent;
+    color: var(--titleColor);
+}
+input::placeholder{
+    color: #555;
+}
+
+.content{
+    width: 100%;
+    max-width: 1400px;
+    position: relative;
+}
+
+.wrapper{
+    width: 100%;
+    max-width: 1400px;
+    background-color: var(--bgColor);
+    margin-bottom: 3rem;
+}
+.wrapper.to-front{
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    background-color: var(--bgColor);
+}
+
+
+.sub-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    color: var(--titleColor);
+}  
+.sub-header .btn-base{
+    cursor: pointer;
+}
+.column-scroller{
+    width: 100%;
+    max-width: inherit;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+.column-scroller::-webkit-scrollbar{
+    background-color:transparent;
+    height: 5px;
+}
+.column-scroller::-webkit-scrollbar-thumb{
+    background-color: rgba(200, 200, 200, .5);
+    border-radius: 20px;
+}
+.column-scroller::-webkit-scrollbar-track{
+    background-color: transparent;
+    border-radius: 20px;
+}
+.cards-container{
+    width: 100%;
+    max-width: inherit;
+    background-color: transparent;
+    margin: auto;
+    display: flex;
+    justify-items: flex-start;
+}
+.cards-container.wrap{
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.movie-card{
+    width: 150px;
+    flex-shrink: 0;
+    background-color: var(--fgColor);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, .2);
+    border-radius: 5px;
+    overflow: hidden;
+    /* margin: 0 0 10px 20px; */
+    margin: 0 10px 10px;
+    position: relative;
+}
+.movie-card-space{
+    width: 1px;
+    flex-shrink: 0;
+    background-color: transparent;
+}
+.movie-card-space.hidden{
+    display: none;
+}
+.movie-card img{
+    width: 100%;
+    height: calc(150px * 1.5);
+}
+
+.movie-intro{
+    color: #fff;
+    padding: .3rem;
+    font-weight: bold;
+    position: relative;
+    height: calc(3rem + .3rem);
+}
+.text-ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.movie-intro h2{
+    max-width: 80%;
+    font-size: .8rem;
+}
+.movie-intro .score{
+    font-size: .8rem;
+    background-color: #555;
+    width: 1.5rem;
+    text-align: center; 
+    padding: .2rem 0;
+    position: absolute;
+    top:10px;
+    right: 0;
+}
+
+.score.red{
+    color: orangered;
+}
+.score.orange{
+    color: orange;
+}
+.score.green{
+    color: greenyellow;
+}
+
+.overview{
+    background-color: #ddd;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(101%);
+    transition: transform 0.3s ease-in-out;
+    font-size: .8rem;
+    height: 80%;
+    overflow-y: auto;
+}
+.overview h4{
+    padding: .3rem 0;
+    font-weight: bold;
+}
+.movie-card:hover .overview{
+    transform: translateY(0);
+}
