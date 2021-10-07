@@ -42,7 +42,7 @@ const seasonDate = getSeasonDate(currentDate);
 //視窗大小變動時
 window.addEventListener('resize', function (ev) {
     const card_containerEls=this.document.querySelectorAll('.cards-container');
-        console.log(card_containerEls);
+        // console.log(card_containerEls);
         card_containerEls.forEach(function(item){
             if(item.classList.contains('wrap')){
                 resizeElement(item,170);

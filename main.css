@@ -59,6 +59,11 @@ header{
     align-self: stretch;
     color: var(--titleColor);
 }
+input[type="text"],
+select:focus,
+textarea{
+    font-size: 16px;
+}
 .btn-search{
     background-color: transparent;
     color: var(--titleColor);
