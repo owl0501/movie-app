@@ -41,17 +41,17 @@ const input_search = document.querySelector('#input-search');
 const seasonDate = getSeasonDate(currentDate);
 //視窗大小變動時
 window.addEventListener('resize', function (ev) {
-    const card_containerEls=this.document.querySelectorAll('.cards-container');
-        // console.log(card_containerEls);
-        card_containerEls.forEach(function(item){
-            if(item.classList.contains('wrap')){
-                resizeElement(item,170);
-            }
-            else{
-                return;
-            }
-            
-        });
+    const card_containerEls = this.document.querySelectorAll('.cards-container');
+    // console.log(card_containerEls);
+    card_containerEls.forEach(function (item) {
+        if (item.classList.contains('wrap')) {
+            resizeElement(item, 170);
+        }
+        else {
+            return;
+        }
+
+    });
 });
 // console.log(seasonDate);
 const Row1 = addRow(genres[0].name);
@@ -105,7 +105,7 @@ function addMovie(items_wrap, datas,) {
     //add elements
     datas.forEach(function (item, index) {
         //取值
-        const { title, poster_path, vote_average,overview } = item;
+        const { title, poster_path, vote_average, overview } = item;
         if (poster_path) {
             const movieEl = document.createElement('div');
             movieEl.classList.add('movie-card');
@@ -146,8 +146,8 @@ function addSearchWrapper(_subtitle) {
         </div>
     `;
 
-    const btn_close=wrapperEl.querySelector('#close');
-    btn_close.addEventListener('click',function(ev){
+    const btn_close = wrapperEl.querySelector('#close');
+    btn_close.addEventListener('click', function (ev) {
         location.reload();
     });
     contentEl.appendChild(wrapperEl);
@@ -189,11 +189,19 @@ function addRow(_subtitle) {
 //變更flex-wrap元件大小
 function resizeElement(elm, baseWidth) {
     //parent-width
-    const widow_width = this.window.innerWidth;
+    // const widow_width = this.window.innerWidth;
+    const widow_width = document.body.clientWidth;
+    // const widow_width = document.body.offsetWidth;
+    // const widow_width = document.body.scrollWidth;
+    const ratio = window.devicePixelRatio;
+    // console.log('r',ratio);
     // console.log('w',widow_width);
-    const onlyWidth = baseWidth * parseInt(widow_width / baseWidth);
-    elm.style.width = onlyWidth + 'px';
-    // console.log('ow',onlyWidth);
+    if (ratio === 1) {
+        const onlyWidth = baseWidth * parseInt(widow_width / baseWidth);
+        elm.style.width = onlyWidth + 'px';
+        // console.log('ow',onlyWidth);
+    }
+
 }
 
 //取得季日期
@@ -234,14 +242,14 @@ function getSeasonDate(currentDate) {
     }
 }
 
-function getClassbyRate(rate){
-    if(rate>7){
+function getClassbyRate(rate) {
+    if (rate > 7) {
         return ('red');
     }
-    else if(rate>3){
+    else if (rate > 3) {
         return ('orange');
     }
-    else{
-        return('green');
+    else {
+        return ('green');
     }
 }
