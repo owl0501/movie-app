@@ -38,6 +38,7 @@ const search = document.querySelector('#search-wrap');
 const input_search = document.querySelector('#input-search');
 
 //initial call
+const ratio = window.devicePixelRatio;
 const seasonDate = getSeasonDate(currentDate);
 //視窗大小變動時
 window.addEventListener('resize', function (ev) {
@@ -189,14 +190,11 @@ function addRow(_subtitle) {
 //變更flex-wrap元件大小
 function resizeElement(elm, baseWidth) {
     //parent-width
-    // const widow_width = this.window.innerWidth;
     const widow_width = document.body.clientWidth;
-    // const widow_width = document.body.offsetWidth;
-    // const widow_width = document.body.scrollWidth;
-    const ratio = window.devicePixelRatio;
-    // console.log('r',ratio);
     // console.log('w',widow_width);
-    if (ratio === 1) {
+    const altRatio=window.devicePixelRatio;
+    // console.log('r',ratio);
+    if (ratio === altRatio) {
         const onlyWidth = baseWidth * parseInt(widow_width / baseWidth);
         elm.style.width = onlyWidth + 'px';
         // console.log('ow',onlyWidth);
