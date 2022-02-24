@@ -38,7 +38,6 @@ const search = document.querySelector('#search-wrap');
 const input_search = document.querySelector('#input-search');
 
 //initial call
-const ratio = window.devicePixelRatio;
 const seasonDate = getSeasonDate(currentDate);
 //視窗大小變動時
 window.addEventListener('resize', function (ev) {
@@ -210,13 +209,9 @@ function resizeElement(elm, baseWidth) {
     //parent-width
     const widow_width = document.body.clientWidth;
     console.log('resize-w',widow_width);
-    const altRatio=window.devicePixelRatio;
-    console.log('resize-r',altRatio);
-    if (ratio === altRatio) {
-        const onlyWidth = baseWidth * parseInt(widow_width / baseWidth);
-        elm.style.width = onlyWidth + 'px';
-        console.log('ow',onlyWidth);
-    }
+    const onlyWidth = baseWidth * parseInt(widow_width / baseWidth);
+    elm.style.width = onlyWidth + 'px';
+    console.log('ow',onlyWidth);
 
 }
 
