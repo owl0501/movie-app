@@ -51,10 +51,9 @@ window.addEventListener('resize', function (ev) {
         else {
             return;
         }
-
     });
 });
-// console.log(seasonDate);
+
 const Row1 = addRow(genres[0].name);
 const R1_movies = Row1.querySelector('.cards-container');
 getMovies(R1_movies, api_discover, seasonDate, genres[0].id);
@@ -76,7 +75,7 @@ search.addEventListener('submit', function (ev) {
     contentEl.innerHTML = '';
     const search_wrap = addSearchWrapper(queryText, true);
     const search_movies = search_wrap.querySelector('.cards-container');
-    getMovies(search_movies, api_search + queryText, seasonDate, genres[2].id);
+    getMovies(search_movies, api_search + queryText, seasonDate, );
     resizeElement(search_movies, 170);
 });
 
@@ -89,14 +88,31 @@ async function fetchApi(api) {
     console.log('await', data);
     return data;
 }
-//一般板
-async function getMovies(_items_wrap, _api, _release_date = null, _genres = '') {
+//
+function fetchApi2(api,_items_wrap){
+    fetch(api,{
+      method:'GET',
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        addMovie(_items_wrap, data.results);
+    })
+    .catch(e=>{ 
+        console.log(e)
+    })
+  
+}
+
+//一般板async
+function getMovies(_items_wrap, _api, _release_date = null, _genres = '') {
     const release_date_query = (_release_date) ? `&release_date.gte=${_release_date.start}&release_date.lte=${_release_date.end}` : ''
     const genres_query = (_genres) ? `&with_genres=${_genres}` : '';
 
     let full_api = `${_api}` + `${release_date_query}` + `${genres_query}`;
-    const data = await fetchApi(full_api);
-    addMovie(_items_wrap, data);
+    fetchApi2(full_api,_items_wrap)
+    //async+await
+    // const data = await fetchApi(full_api);
+    // addMovie(_items_wrap, data);
 }
 
 //新增電影
@@ -178,26 +194,28 @@ function addRow(_subtitle) {
         if (items_wrap.classList.contains('wrap')) {
             items_wrap.classList.remove('wrap');
             items_wrap.style.width = 100 + '%';
+            btn_showAll.textContent='show all';
         }
         else {
             items_wrap.classList.add('wrap');
+            btn_showAll.textContent='show less';
             resizeElement(items_wrap, 170);
         }
     });
     contentEl.appendChild(wrapperEl);
     return wrapperEl;
 }
-//變更flex-wrap元件大小
+//變更flex-wrap元件大小(配合margin:auto)
 function resizeElement(elm, baseWidth) {
     //parent-width
     const widow_width = document.body.clientWidth;
-    // console.log('w',widow_width);
+    console.log('resize-w',widow_width);
     const altRatio=window.devicePixelRatio;
-    // console.log('r',ratio);
+    console.log('resize-r',altRatio);
     if (ratio === altRatio) {
         const onlyWidth = baseWidth * parseInt(widow_width / baseWidth);
         elm.style.width = onlyWidth + 'px';
-        // console.log('ow',onlyWidth);
+        console.log('ow',onlyWidth);
     }
 
 }
@@ -239,7 +257,7 @@ function getSeasonDate(currentDate) {
             }
     }
 }
-
+//顏色分級
 function getClassbyRate(rate) {
     if (rate > 7) {
         return ('red');
